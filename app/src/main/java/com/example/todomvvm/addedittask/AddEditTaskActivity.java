@@ -22,8 +22,6 @@ public class AddEditTaskActivity extends AppCompatActivity {
 
     // Extra for the task ID to be received in the intent
     public static final String EXTRA_TASK_ID = "extraTaskId";
-    // Extra for the task ID to be received after rotation
-    public static final String INSTANCE_TASK_ID = "instanceTaskId";
     // Constants for priority
     public static final int PRIORITY_HIGH = 1;
     public static final int PRIORITY_MEDIUM = 2;
@@ -36,24 +34,14 @@ public class AddEditTaskActivity extends AppCompatActivity {
     EditText mEditText;
     RadioGroup mRadioGroup;
     Button mButton;
-
     private int mTaskId = DEFAULT_TASK_ID;
-
-
     AddEditTaskViewModel viewModel;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_task);
 
-
-
         initViews();
-
-        if (savedInstanceState != null && savedInstanceState.containsKey(INSTANCE_TASK_ID)) {
-            mTaskId = savedInstanceState.getInt(INSTANCE_TASK_ID, DEFAULT_TASK_ID);
-        }
-
         Intent intent = getIntent();
 
         if (intent != null && intent.hasExtra(EXTRA_TASK_ID)) {
@@ -79,12 +67,6 @@ public class AddEditTaskActivity extends AppCompatActivity {
             AddEditTaskViewModelFactory factory = new AddEditTaskViewModelFactory(getApplication(), mTaskId);
             viewModel = ViewModelProviders.of(this, factory).get(AddEditTaskViewModel.class);
         }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putInt(INSTANCE_TASK_ID, mTaskId);
-        super.onSaveInstanceState(outState);
     }
 
     /**
