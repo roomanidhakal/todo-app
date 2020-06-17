@@ -46,4 +46,29 @@ public class Repository {
             }
         });
     }
+
+
+
+
+    public  void  insertLock(final LockEntry lock)
+    {
+        AppDatabase.databaseWriteExecutor.execute(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                dao.insertLock(lock);
+            }
+        });
+    }
+
+    public LiveData<String> getLockByValue()
+    {
+        return dao.loadLockByValue();
+    }
+
+    public LiveData<Integer> getLockCount()
+    {
+        return dao.getCountLock();
+    }
 }

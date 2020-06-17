@@ -34,7 +34,9 @@ public class AddEditTaskActivity extends AppCompatActivity {
     EditText mEditText;
     RadioGroup mRadioGroup;
     Button mButton;
+
     private int mTaskId = DEFAULT_TASK_ID;
+
     AddEditTaskViewModel viewModel;
 
     protected void onCreate(Bundle savedInstanceState) {

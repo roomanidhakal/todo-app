@@ -19,8 +19,6 @@ public class MainActivityViewModel extends AndroidViewModel {
 
    private  LiveData<List<TaskEntry>> tasks;
 
-
-
     public  MainActivityViewModel(Application application){
         super(application);
         AppDatabase database = AppDatabase.getInstance(application);

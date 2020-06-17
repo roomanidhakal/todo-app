@@ -12,7 +12,7 @@ import androidx.room.TypeConverters;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {TaskEntry.class}, version = 1, exportSchema = false)
+@Database(entities = {TaskEntry.class, LockEntry.class}, version = 1, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -38,7 +38,5 @@ public abstract class AppDatabase extends RoomDatabase {
         return sInstance;
     }
 
-public abstract TaskDao taskDao();
-
-
+    public abstract TaskDao taskDao();
 }

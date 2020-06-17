@@ -12,4 +12,8 @@
     <color name="materialYellow">#F1C40F</color>
     <color name="white">#FFFFFF</color>
 
+    <!-- colors pattern selection -->
+    <color name="colorCorrectLine">#008000</color>
+    <color name="colorNormalLine">#FFFF</color>
+    <color name="colorWrongLine">#FF0000</color>
 </resources>

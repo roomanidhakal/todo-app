@@ -28,4 +28,13 @@ public interface TaskDao {
     @Query("Select * from task where id =:taskId")
     LiveData<TaskEntry> loadTAskById(int taskId);
 
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertLock(LockEntry lock);
+
+    @Query("Select lock from lock where id = 1")
+    LiveData<String> loadLockByValue();
+
+    @Query("Select count(*) from lock")
+    LiveData<Integer> getCountLock();
 }
