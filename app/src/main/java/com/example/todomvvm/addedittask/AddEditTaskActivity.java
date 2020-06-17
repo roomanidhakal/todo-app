@@ -1,6 +1,7 @@
 package com.example.todomvvm.addedittask;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ShareCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -49,6 +50,8 @@ public class AddEditTaskActivity extends AppCompatActivity {
     //speech to text
     private final int REQ_CODE = 100;
     ImageView speak;
+    ImageView share;
+    String task_description;
 
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -109,6 +112,16 @@ public class AddEditTaskActivity extends AppCompatActivity {
                 onClickSpeak();
             }
         });
+
+        share = findViewById(R.id.share);
+        share.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                onClickShare();
+            }
+        });
     }
 
     /**
@@ -123,6 +136,8 @@ public class AddEditTaskActivity extends AppCompatActivity {
         mEditText.setText(task.getDescription());
         setPriorityInViews(task.getPriority());
 
+        share.setVisibility(View.VISIBLE);
+        task_description = task.getDescription();
     }
 
     /**
@@ -159,6 +174,17 @@ public class AddEditTaskActivity extends AppCompatActivity {
         {
             Toast.makeText(getApplicationContext(), "Sorry your device not supported", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void onClickShare()
+    {
+        String mimeType = "text/plain";
+        ShareCompat.IntentBuilder
+                .from(this)
+                .setType(mimeType)
+                .setChooserTitle("Choose application to share your task description")
+                .setText(task_description)
+                .startChooser();
     }
 
     @Override
