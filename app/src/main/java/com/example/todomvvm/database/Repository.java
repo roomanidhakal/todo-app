@@ -21,7 +21,8 @@ public class Repository {
     }
 
     public void updateTask(final TaskEntry task){
-        AppDatabase.databaseWriteExecutor.execute(new Runnable() {
+        AppDatabase.databaseWriteExecutor.execute(new Runnable()
+        {
             @Override
             public void run() {
                 dao.update(task);
@@ -47,9 +48,21 @@ public class Repository {
         });
     }
 
+    public void deleteAll()
+    {
+        AppDatabase.databaseWriteExecutor.execute(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                dao.deleteAllTask();
+            }
+        });
+    }
 
 
 
+    //Lock Table
     public  void  insertLock(final LockEntry lock)
     {
         AppDatabase.databaseWriteExecutor.execute(new Runnable()
