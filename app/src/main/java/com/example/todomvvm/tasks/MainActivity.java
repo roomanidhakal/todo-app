@@ -1,35 +1,28 @@
 package com.example.todomvvm.tasks;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
-import com.example.todomvvm.LockActivity;
 import com.example.todomvvm.addedittask.AddEditTaskActivity;
 import com.example.todomvvm.R;
-import com.example.todomvvm.database.AppDatabase;
-import com.example.todomvvm.database.Repository;
 import com.example.todomvvm.database.TaskEntry;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements TaskAdapter.ItemClickListener {
-
+public class MainActivity extends AppCompatActivity implements TaskAdapter.ItemClickListener
+{
     // Constant for logging
     private static final String TAG = MainActivity.class.getSimpleName();
     // Member variables for the adapter and RecyclerView
@@ -128,11 +121,13 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.ItemC
         switch (item.getItemId())
         {
             case R.id.delete:
-                viewModel.deleteAllTasks();
-                Toast.makeText(MainActivity.this, "All Tasks Deleted", Toast.LENGTH_LONG).show();
-                return true;
+                FragmentManager fm = getSupportFragmentManager();
+                AlertFragment fragment = new AlertFragment();
+                fragment.show(fm, "Delete Confirmation");
+
             default:
                 return super.onContextItemSelected(item);
         }
     }
+
 }
